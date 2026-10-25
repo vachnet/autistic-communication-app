@@ -1,0 +1,57 @@
+appId: com.communicatetogether.app
+---
+- launchApp:
+    clearState: true
+- takeScreenshot: subject
+- scrollUntilVisible:
+    element:
+      id: word-i
+- tapOn:
+    id: word-i
+- tapOn:
+    id: word-i
+- takeScreenshot: verb
+- scrollUntilVisible:
+    element:
+      id: word-eat
+- tapOn:
+    id: word-eat
+- tapOn:
+    id: word-eat
+- takeScreenshot: object
+- scrollUntilVisible:
+    element:
+      id: word-rice
+- tapOn:
+    id: word-rice
+- tapOn:
+    id: word-rice
+- takeScreenshot: modifier
+- scrollUntilVisible:
+    element:
+      id: word-hot
+- tapOn:
+    id: word-hot
+- tapOn:
+    id: word-hot
+- scrollUntilVisible:
+    element: นี่คือสิ่งที่ฉันอยากบอก
+- assertVisible: นี่คือสิ่งที่ฉันอยากบอก
+- takeScreenshot: summary
+- scrollUntilVisible:
+    element:
+      id: restart-sentence
+- tapOn:
+    id: restart-sentence
+- tapOn:
+    id: preferences
+- assertVisible: ปรับให้สบายตา
+- takeScreenshot: preferences
+- tapOn: กลับไปเลือกคำ
+- scrollUntilVisible:
+    element:
+      id: add-word
+- tapOn:
+    id: add-word
+- assertVisible: 1. ถ่ายรูป
+- takeScreenshot: add-photo

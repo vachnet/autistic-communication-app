@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "types": []
+  },
+  "files": [
+    "src/domain.ts",
+    "src/session.ts",
+    "src/design.ts",
+    "src/playbackCore.ts",
+    "src/storageCore.ts"
+  ]
+}

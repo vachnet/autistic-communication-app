@@ -1,0 +1,65 @@
+name: Android preview APK
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Check code
+        run: npm run check
+      - name: Check Expo dependency compatibility
+        run: npx expo install --check
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --no-install
+      - name: Build standalone preview APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
+      - name: Prepare download
+        run: |
+          mkdir -p artifacts
+          cp android/app/build/outputs/apk/release/app-release.apk artifacts/communicate-together-android.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: communicate-together-android
+          path: artifacts/*.apk
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dependency-lockfile
+          path: package-lock.json
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: communicate-together-android
+          path: artifacts
+      - name: Publish preview download
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: gh release create "$RELEASE_TAG" artifacts/communicate-together-android.apk --verify-tag --title "$RELEASE_TAG — Android preview" --notes-file docs/RELEASE_NOTES.md --prerelease

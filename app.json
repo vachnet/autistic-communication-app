@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "สื่อสารด้วยกัน",
+    "slug": "autistic-communication-app",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.communicatetogether.app"
+    },
+    "android": {
+      "package": "com.communicatetogether.app",
+      "versionCode": 1,
+      "permissions": ["CAMERA", "RECORD_AUDIO"],
+      "blockedPermissions": ["android.permission.READ_MEDIA_AUDIO", "android.permission.READ_MEDIA_VIDEO", "android.permission.READ_MEDIA_IMAGES"]
+    },
+    "plugins": [
+      ["expo-image-picker", {
+        "photosPermission": "เลือกรูปภาพเพื่อทำบัตรคำของคุณ",
+        "cameraPermission": "ถ่ายภาพเพื่อทำบัตรคำของคุณ",
+        "microphonePermission": false
+      }],
+      ["expo-audio", {
+        "microphonePermission": "บันทึกเสียงเพื่อใช้พูดบัตรคำของคุณ",
+        "enableBackgroundRecording": false,
+        "enableBackgroundPlayback": false
+      }]
+    ]
+  }
+}

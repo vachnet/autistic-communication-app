@@ -1,0 +1,43 @@
+{
+  "name": "autistic-communication-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "typecheck": "tsc --noEmit",
+    "typecheck:core": "tsc -p tsconfig.core.json",
+    "test": "node --experimental-strip-types --test src/*.test.ts",
+    "test:components": "jest --config jest.config.cjs --runInBand",
+    "check": "npm run typecheck && npm test && npm run test:components",
+    "build:apk": "npx eas-cli@latest build --platform android --profile preview",
+    "build:ios:simulator": "npx eas-cli@latest build --platform ios --profile simulator",
+    "build:ios:local": "python3 scripts/build_ios_simulator.py"
+  },
+  "dependencies": {
+    "expo": "~58.0.0",
+    "expo-audio": "~58.0.10",
+    "expo-file-system": "~58.0.10",
+    "expo-image-picker": "~58.0.10",
+    "expo-speech": "~58.0.3",
+    "expo-status-bar": "~58.0.4",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "react": "19.3.0",
+    "react-native": "0.88.0",
+    "react-native-safe-area-context": "~5.10.1"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^14.0.0",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.0",
+    "jest-expo": "~58.0.12",
+    "test-renderer": "^1.3.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "~19.3.0",
+    "typescript": "~6.0.3"
+  },
+  "engines": { "node": ">=22.13.0" }
+}
